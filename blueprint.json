@@ -3,151 +3,192 @@
     {
       "name": "hero",
       "source": "block-collection",
-      "description": "Full-width hero banner with background image, heading, subheading, and CTA text. Used at the top of every page.",
-      "contentModel": "Standalone: Row 1 = image, Row 2 = heading + subheading + body text. Decoration code finds h1/h2/p/a elements."
+      "description": "Full-width hero banner with background image, heading, and description text",
+      "contentModel": "Standalone: Row 1 = image, Row 2 = heading + description text. H1 for main heading, H2 for subheading, paragraphs for description.",
+      "liveExample": "https://main--aem-block-collection--adobe.aem.live/block-collection/hero",
+      "usedIn": ["homepage", "treatment", "faq", "find-a-clinic"]
     },
     {
       "name": "cards",
       "source": "block-collection",
-      "description": "Grid of items with optional icon/image, heading, and description. Used for 'Why JUVÉDERM' value propositions and feature highlights.",
-      "contentModel": "Collection: Each row = one card. Col 1 = image/icon (optional), Col 2 = heading + description text."
-    },
-    {
-      "name": "columns",
-      "source": "block-collection",
-      "description": "Side-by-side content layout. Used for benefit sections with image on one side, text content on other.",
-      "contentModel": "Standalone: Single row with 2+ columns. Each column contains mixed content (images, text, links)."
+      "description": "Grid of content items with optional images/icons, headings, and descriptions",
+      "contentModel": "Collection: Each row = one card. Column 1 = image/icon (optional), Column 2 = heading + description text. H3 for card title.",
+      "liveExample": "https://main--aem-block-collection--adobe.aem.live/block-collection/cards",
+      "usedIn": ["homepage", "treatment"]
     },
     {
       "name": "carousel",
       "source": "block-collection",
-      "description": "Sliding carousel of product images with descriptions. Used for JUVÉDERM product showcases on treatment pages.",
-      "contentModel": "Collection: Each row = one slide. Col 1 = product image, Col 2 = product name (heading) + description."
+      "description": "Horizontally scrolling content panels for product displays and before/after comparisons",
+      "contentModel": "Collection: Each row = one slide. Column 1 = image, Column 2 = title + description text.",
+      "liveExample": "https://main--aem-block-collection--adobe.aem.live/block-collection/carousel",
+      "usedIn": ["homepage", "treatment"]
     },
     {
-      "name": "accordion",
+      "name": "columns",
       "source": "block-collection",
-      "description": "Expandable Q&A sections. Used for FAQ content on treatment pages and the main FAQ page.",
-      "contentModel": "Collection: Each row = one Q&A item. Col 1 = question (heading), Col 2 = answer text."
+      "description": "Side-by-side content in 2 or 3 columns for image+text layouts",
+      "contentModel": "Standalone: Single row with 2-3 cells. Each cell contains any combination of images, headings, paragraphs, and links.",
+      "liveExample": "https://main--aem-block-collection--adobe.aem.live/block-collection/columns",
+      "usedIn": ["treatment", "faq"]
     },
     {
       "name": "tabs",
       "source": "block-collection",
-      "description": "Tabbed content panels. Used for VROUWELIJK/MANNELIJK treatment area switcher.",
-      "contentModel": "Auto-blocked: Each tab is a section with heading as tab label. Section metadata identifies tab grouping."
+      "description": "Tabbed interface for organizing related content panels (female/male treatment areas)",
+      "contentModel": "Auto-blocked: Section with multiple H2 headings creates tabs. Each H2 becomes a tab label, content below becomes tab panel.",
+      "liveExample": "https://main--aem-block-collection--adobe.aem.live/block-collection/tabs",
+      "usedIn": ["homepage", "treatment"]
     },
     {
-      "name": "before-after",
-      "source": "custom",
-      "description": "Before/after image comparison slider. Shows treatment results with paired before and after images.",
-      "contentModel": "Collection: Each row = one comparison pair. Col 1 = before label + image, Col 2 = after label + image."
+      "name": "accordion",
+      "source": "block-collection",
+      "description": "Expandable Q&A sections for FAQ content",
+      "contentModel": "Collection: Each row = one item. Column 1 = question/trigger text, Column 2 = answer/expanded content.",
+      "liveExample": "https://main--aem-block-collection--adobe.aem.live/block-collection/accordion",
+      "usedIn": ["treatment", "faq"]
     }
   ],
   "archetypeBlueprints": {
-    "landing": [
+    "homepage": [
       {
-        "name": "homepage",
+        "name": "Homepage",
         "sections": [
           {
-            "style": "hero",
+            "name": "Hero",
+            "style": "light",
             "sequences": ["hero"]
           },
           {
-            "style": "light",
-            "sequences": ["default", "columns"]
-          },
-          {
+            "name": "Why Juvederm",
             "style": "light",
             "sequences": ["default", "cards"]
           },
           {
+            "name": "Before After",
             "style": "light",
-            "sequences": ["default", "before-after"]
+            "sequences": ["default", "carousel"]
           },
           {
+            "name": "Treatment Areas",
             "style": "light",
             "sequences": ["default", "tabs"]
           },
           {
+            "name": "Clinic Finder",
             "style": "light",
             "sequences": ["default"]
-          }
-        ]
-      },
-      {
-        "name": "faq",
-        "sections": [
-          {
-            "style": "hero",
-            "sequences": ["hero"]
           },
           {
+            "name": "References",
             "style": "light",
-            "sequences": ["default", "columns"]
-          },
-          {
-            "style": "light",
-            "sequences": ["default", "columns"]
-          },
-          {
-            "style": "light",
-            "sequences": ["default", "columns"]
-          },
-          {
-            "style": "light",
-            "sequences": ["default", "columns"]
-          },
-          {
-            "style": "light",
-            "sequences": ["default", "columns"]
+            "sequences": ["default"]
           }
         ]
       }
     ],
     "treatment": [
       {
-        "name": "treatment-page",
+        "name": "Treatment Page",
         "sections": [
           {
-            "style": "hero",
+            "name": "Hero",
+            "style": "light",
             "sequences": ["hero"]
           },
           {
+            "name": "Benefits",
             "style": "light",
             "sequences": ["columns"]
           },
           {
-            "style": "light",
-            "sequences": ["default", "cards"]
-          },
-          {
-            "style": "light",
-            "sequences": ["default", "before-after"]
-          },
-          {
+            "name": "Before After",
             "style": "light",
             "sequences": ["default", "carousel"]
           },
           {
+            "name": "Products",
+            "style": "light",
+            "sequences": ["default", "carousel"]
+          },
+          {
+            "name": "FAQ",
             "style": "light",
             "sequences": ["columns", "accordion"]
           },
           {
+            "name": "Treatment Areas",
             "style": "light",
             "sequences": ["default", "tabs"]
           },
           {
+            "name": "Clinic Finder",
+            "style": "light",
+            "sequences": ["default"]
+          },
+          {
+            "name": "References",
             "style": "light",
             "sequences": ["default"]
           }
         ]
       }
     ],
-    "utility": [
+    "faq": [
       {
-        "name": "utility-page",
+        "name": "FAQ Page",
         "sections": [
           {
+            "name": "Hero",
+            "style": "light",
+            "sequences": ["hero"]
+          },
+          {
+            "name": "About Juvederm",
+            "style": "light",
+            "sequences": ["default", "columns"]
+          },
+          {
+            "name": "Safety",
+            "style": "light",
+            "sequences": ["default"]
+          },
+          {
+            "name": "Expectations",
+            "style": "light",
+            "sequences": ["default", "columns"]
+          },
+          {
+            "name": "Results and Costs",
+            "style": "light",
+            "sequences": ["default", "columns"]
+          },
+          {
+            "name": "Facial Areas",
+            "style": "light",
+            "sequences": ["default", "columns"]
+          }
+        ]
+      }
+    ],
+    "find-a-clinic": [
+      {
+        "name": "Find a Clinic Page",
+        "sections": [
+          {
+            "name": "Clinic Finder",
+            "style": "light",
+            "sequences": ["default", "columns"]
+          }
+        ]
+      }
+    ],
+    "legal": [
+      {
+        "name": "Legal Page",
+        "sections": [
+          {
+            "name": "Content",
             "style": "light",
             "sequences": ["default"]
           }
@@ -158,28 +199,23 @@
   "siteConventions": {
     "language": "nl",
     "locale": "nl-NL",
-    "brandName": "JUVÉDERM®",
-    "brandOwner": "Allergan Aesthetics (AbbVie)",
-    "typography": {
-      "headings": "Primary brand font",
-      "body": "System/brand font stack"
-    },
-    "colors": {
-      "primary": "#c4007a",
+    "urlStructure": "/nl/{section}/{page}",
+    "headerNavigation": "Dropdown menu with Behandeling and FAQ categories plus CTA button",
+    "footerStructure": "Treatment links, FAQ links, legal links, social media (Instagram, Facebook), warning message, disclaimer text",
+    "brandColors": {
+      "primary": "#e30079",
       "secondary": "#1a1a1a",
       "background": "#ffffff",
-      "backgroundAlt": "#f5f5f5",
-      "text": "#333333"
+      "lightGrey": "#f5f5f5"
     },
-    "imageHandling": "Images served from Adobe Dynamic Media. Migration should preserve original URLs for now; can optimize post-migration.",
-    "footerDisclaimer": "Each page has a mandatory legal disclaimer with references in the footer area.",
-    "referenceFootnotes": "Scientific references appear at section/page level. Migrate as default content paragraphs.",
-    "clinicFinder": "Interactive clinic finder widget uses third-party JS. Will be replaced with a link/embed placeholder in EDS.",
-    "cookieConsent": "OneTrust cookie consent banner. Will need separate integration post-migration.",
-    "sharedSections": [
-      "Treatment area tabs (VROUWELIJK/MANNELIJK) appear on homepage and all treatment pages",
-      "Clinic finder CTA section appears on most pages",
-      "Footer disclaimer text is consistent across all pages"
-    ]
+    "commonElements": {
+      "clinicFinderWidget": "Present on homepage and all treatment pages as section-level default content. Contains heading, location input, and CTA button.",
+      "referencesSection": "Medical references as ordered list at bottom of content pages",
+      "warningBanner": "Footer warning: 'Kijk uit. Jezelf mooier maken kan lelijk uitpakken.' with icon",
+      "beforeAfterPattern": "Paired images with 'Voor'/'Na' labels in carousel",
+      "treatmentAreaTabs": "Reusable tabs component with female/male variants, appearing on homepage and all treatment pages - candidate for fragment"
+    },
+    "imageHandling": "All images from Adobe Dynamic Media (dm-aid URLs). Use original URLs with preferwebp=true&quality=85 parameters.",
+    "disclaimerText": "Required medical device disclaimer and AbbVie copyright at bottom of all pages"
   }
 }
