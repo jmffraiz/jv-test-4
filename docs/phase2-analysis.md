@@ -1,58 +1,55 @@
 # Phase 2 — Analysis
 
 ## Summary
-Analyzed site structure, built block inventory, and defined migration blueprint for juvederm.nl.
+Analyzed juvederm.nl site structure, identified content patterns, built block inventory, and created migration blueprint.
 
 ## Phase 2a — Scrape Samples
-Scraped sample pages for all 5 archetypes. Headless browser had SSL/DNS issues in the container, so content was captured via web_fetch and structured manually.
+Scraped 6 representative pages (1+ per archetype) using Playwright:
+- **homepage**: /nl (18 images, 339KB HTML)
+- **treatment/lips**: /nl/treatment/lips (22 images, 241KB HTML)
+- **treatment/male**: /nl/treatment/male (22 images, 253KB HTML)
+- **faq**: /nl/qa (12 images, 184KB HTML)
+- **legal**: /nl/disclaimer (6 images, 137KB HTML)
+- **find-a-clinic**: /nl/find-a-clinic (8 images, 148KB HTML)
 
-### Archetypes Scraped
-| Archetype | Pages | Status |
-|-----------|-------|--------|
-| homepage | 2 | ✅ |
-| treatment | 3 (lips, eye-area, male) | ✅ |
-| faq | 2 | ✅ |
-| find-a-clinic | 2 | ✅ |
-| legal | 3 (contact-us, disclaimer, voorwaarden) | ✅ |
+All outputs include screenshot.png, cleaned.html, metadata.json, and images/ folder.
 
 ## Phase 2b — Block Inventory
 
-### Block Collection Blocks Found
-| Block | Status | Live Example |
-|-------|--------|-------------|
-| hero | ✅ Found | https://main--aem-block-collection--adobe.aem.live/block-collection/hero |
-| cards | ✅ Known | https://main--aem-block-collection--adobe.aem.live/block-collection/cards |
-| carousel | ✅ Found | https://main--aem-block-collection--adobe.aem.live/block-collection/carousel |
-| columns | ✅ Known | https://main--aem-block-collection--adobe.aem.live/block-collection/columns |
-| tabs | ✅ Found | https://main--aem-block-collection--adobe.aem.live/block-collection/tabs |
-| accordion | ✅ Found | https://main--aem-block-collection--adobe.aem.live/block-collection/accordion |
+### Blocks Already in Repository
+| Block | Source | Purpose |
+|-------|--------|---------|
+| hero | Block Collection | Full-width background image with overlaid heading |
+| cards | Block Collection | Grid of feature cards with images/text |
+| before-after | Custom | Before/after image comparison with dot navigation |
+| carousel | Block Collection | Horizontal sliding product cards |
+| accordion | Block Collection | Expandable Q&A sections |
+| tabs | Block Collection | Tabbed content panels (VROUWELIJK/MANNELIJK) |
+| columns | Block Collection | Side-by-side content layout |
+| fragment | Block Collection | Embeds reusable content from other pages |
+| header | Block Collection | Site navigation header |
+| footer | Block Collection | Site footer |
 
-### Decision: All blocks from Block Collection
-No custom blocks needed. All 6 blocks are standard Block Collection blocks with proven implementations.
+### Key Finding
+The repository already contains all needed blocks. No new blocks need to be built. The `before-after` block is a custom implementation specific to this brand's before/after treatment photos.
 
-## Phase 2c — Blueprint
+## Phase 2c — Migration Blueprint
 
-### Content Patterns Identified
+### Archetype → Block Mapping
+| Archetype | Blocks Used | Section Count |
+|-----------|------------|---------------|
+| homepage | hero, cards, before-after, fragment (×2) | 7 |
+| treatment (×5) | hero, cards, before-after, carousel, columns+accordion, fragment (×2) | 9 |
+| faq | hero | 8 (mostly default content) |
+| find-a-clinic | none (all default) | 3 |
+| legal (×3) | none (all default) | 1 |
 
-1. **Hero Section** (all content pages): Full-width image with H1 heading and optional subheading/description
-2. **Value Proposition Cards** (homepage): 4-column grid with icons, H3 titles, and descriptions
-3. **Before/After Carousel** (homepage, treatment): Paired images with "Voor"/"Na" labels
-4. **Product Carousel** (treatment): Horizontally scrolling product cards with images and descriptions
-5. **FAQ Accordion** (treatment, faq): Expandable Q&A with definition list structure
-6. **Treatment Area Tabs** (homepage, treatment): VROUWELIJK/MANNELIJK tabs with treatment links
-7. **Benefits Columns** (treatment): Image alongside benefit cards
-8. **Clinic Finder** (homepage, treatment, find-a-clinic): Search widget — migrated as default content
-9. **References** (all pages): Ordered list of medical citations — default content
-10. **Legal Text** (legal pages): Pure default content (headings + paragraphs)
+### Shared Fragments
+1. **treatment-tabs** — Tabs block with VROUWELIJK/MANNELIJK treatment area navigation (used on 6 pages)
+2. **clinic-finder** — CTA section linking to clinic finder page (used on 6 pages)
 
-### Site Conventions
-- Language: Dutch (nl-NL)
-- Images: Adobe Dynamic Media with dm-aid URLs
-- Footer: Warning banner + treatment links + FAQ links + legal links + social
-- Brand: JUVÉDERM® (Allergan Aesthetics / AbbVie)
-
-## Validation
-- Phase 2a Tier 1: PASS
-- Phase 2b Tier 1: PASS
-- Phase 2c Tier 1: PASS
-- Retries: 0
+### Content Conventions
+- All content is Dutch (nl)
+- Medical reference citations preserved as small text
+- Images sourced from Adobe Dynamic Media CDN
+- URL structure preserved: /nl/path → /nl/path

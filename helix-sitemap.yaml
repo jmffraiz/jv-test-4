@@ -1,12 +1,7 @@
+version: 1
 sitemaps:
   default:
+    origin: https://main--jv-test-4--jmffraiz.aem.live
     include:
       - /nl/**
-    exclude:
-      - /nl/drafts/**
-    target: /sitemap.xml
-    origin: https://www.juvederm.nl
-    hreflang:
-      nl:
-        include:
-          - /nl/**
+    source: /query-index.json
